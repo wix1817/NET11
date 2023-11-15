@@ -10,4 +10,5 @@ public interface IBuildServices
     public AllComponentsForAddingBlm GetAllComponents();
     IndexBuildBlm GetIndexBuildBlm(int page, int perPage);
     void CreateNewBuild(NewBuildBlm newBuild);
+    BaseBuildBlm GetBuildById(int id);
 }

@@ -102,6 +102,49 @@ namespace BusinessLayer.PcBuildServices
             _buildRepository.Save(buildDb);
         }
 
+        public BaseBuildBlm GetBuildById(int id)
+        {
+            var build = _buildRepository.Get(id);
+            var buildCreator = _userRepository.Get(build.Creator.Id);
+            return new BuildBlm()
+            {
+                Id = build.Id,
+                Label = build.Label,
+                Description = build.Description,
+                isVirtual = build.isVirtual,
+                PhotosPath = build.PhotosPath,
+                Rating = build.Rating,
+                Price = build.Price.ToString(),
+                IsPrivate = build.IsPrivate,
+                CreatorAvatarPath = buildCreator.AvatarPath,
+                CreatorName = buildCreator.Name,
+                //Link = $"dsgsdgsdgsdgsgddsg/{build.Id}", //TODO
+                CpuName = build.Processor.FullName,
+                CpuPrice = build.Processor.Price.ToString(),
+                CpuCollerName = build.Cooler.FullName,
+                CollerPrice = build.Cooler.Price.ToString(),
+                MotherboardName = build.Motherboard.FullName,
+                MotherboardPrice = build.Motherboard.Price.ToString(),
+                RamName = build.Ram.FullName,
+                RamPrice = build.Ram.Price.ToString(),
+                RamCount = build.RamCount.ToString(),
+                SsdName = build.Ssd.FullName,
+                SsdCount = build.SsdCount.ToString(),
+                SsdPrice = build.Ssd.Price.ToString(),
+                HddName = build.Hdd.FullName,
+                HddPrice = build.Hdd.Price.ToString(),
+                HddCount = build.HddCount.ToString(),
+                GpuName = build.Gpu.FullName,
+                GpuPrice = build.Gpu.Price.ToString(),
+                GpuCount = build.GpusCount.ToString(),
+                CaseName = build.Case.FullName,
+                CasePrice = build.Case.Price.ToString(),
+                PsuName = build.Psu.FullName,
+                PsuPrice = build.Psu.Price.ToString(),
+                DateOfCreate = build.DateOfCreate.ToString()
+            };
+        }
+
         private decimal CalculatePrice(Processor processor, Motherboard motherboard, Gpu? gpu, int? gpuCount, Ssd? ssd,
             int? ssdCount, Hdd? hdd, int? hddCount, Ram ram, int? ramCount, Psu psu, Case currentCase, Cooler cooler)
         {

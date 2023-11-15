@@ -146,7 +146,7 @@ public class PcBuildController : Controller
 
         var newBuild = new NewBuildBlm()
         {
-            CreatorId = currentUserId,
+             CreatorId = currentUserId,
             ProcessorId = viewModel.ProcessorId,
             MotherboardId = viewModel.MotherboardId,
             GpuId = viewModel.GpuId,
@@ -170,5 +170,16 @@ public class PcBuildController : Controller
     public IActionResult Remove(int id) //TODO
     {
         return RedirectToAction("Index", "PcBuild");
+    }
+
+    [HttpGet]
+    public IActionResult Build(int id)
+    {
+        var build = _buildServices.GetBuildById(id);
+        var viewModel = new BuildViewModel()
+        {
+            
+        };
+        return View();
     }
 }

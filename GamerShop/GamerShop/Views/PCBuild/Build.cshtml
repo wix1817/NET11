@@ -1,0 +1,51 @@
+﻿@model GamerShop.Models.PcBuild.BuildViewModel
+
+<div>
+    <div class="container-fluid text-center">
+        <p class="fs-4">BUILD</p>
+        <p class="fs-1 fw-bolder">@Model.Label</p>
+        <div>
+            <p class="fs-3 fw-light">by</p>
+            <img src="@Model.CreatorAvatarPath" class="rounded-circle" alt="">
+            <p class="fs-3 fw-bolder">@Model.CreatorName</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="statBlock">
+                        @Model.Rating
+                        @Model.CommentsCount
+                        @Model.Link
+                    </div>
+                    <div class="partList">
+                        @Model.Cpu
+                        @Model.CpuColler
+                        @Model.Motherboard
+                        @Model.Ram
+                        @Model.Storage
+                        @Model.Gpu
+                        @Model.Case
+                        @Model.Psu
+                    </div>
+                    <div class="details">
+                        @Model.DatePublished
+                        @Model.DateBuild
+                        @Model.CpuRate
+                        @Model.CpuTempIdle
+                        @Model.CpuTempLoad
+                        @Model.GpuTempIdle
+                        @Model.GpuTempLoad
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="description">
+                        @Model.Description
+                    </div>
+                    <div class="comments">
+                        @Model.Comments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

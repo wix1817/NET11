@@ -3,6 +3,7 @@ namespace DALInterfaces.Models.PcBuild;
 public class Build : BaseModel
 {
     public string Label { get; set; } = null!;
+    public string Description { get; set; }
     public DateTime DateOfCreate { get; set; }
     public bool isVirtual { get; set; }
     public string? PhotosPath { get; set; }

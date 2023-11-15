@@ -60,11 +60,7 @@ namespace GamerShop.Controllers.Football
             _footballLeagueServices.Delete(id);
             return RedirectToAction("LeagueList", "FootballLeagues");
         }
-
-        public IActionResult index()
-        {
-            return View();
-        }
+        
 
     }
 }
