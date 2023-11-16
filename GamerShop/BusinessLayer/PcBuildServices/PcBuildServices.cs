@@ -105,7 +105,6 @@ namespace BusinessLayer.PcBuildServices
         public BaseBuildBlm GetBuildById(int id)
         {
             var build = _buildRepository.Get(id);
-            var buildCreator = _userRepository.Get(build.Creator.Id);
             return new BuildBlm()
             {
                 Id = build.Id,
@@ -116,8 +115,9 @@ namespace BusinessLayer.PcBuildServices
                 Rating = build.Rating,
                 Price = build.Price.ToString(),
                 IsPrivate = build.IsPrivate,
-                CreatorAvatarPath = buildCreator.AvatarPath,
-                CreatorName = buildCreator.Name,
+                CreatorId = build.Creator.Id,
+                CreatorAvatarPath = build.Creator.AvatarPath,
+                CreatorName = build.Creator.Name,
                 //Link = $"dsgsdgsdgsdgsgddsg/{build.Id}", //TODO
                 CpuName = build.Processor.FullName,
                 CpuPrice = build.Processor.Price.ToString(),

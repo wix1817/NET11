@@ -16,9 +16,9 @@ namespace GamerShop.Controllers
 			_authService = authService;
 		}
 
-		public async Task<IActionResult> Index()
+		public IActionResult Index()
         {
-            var messages = await _homeServices.GetLastMessagesAsync();
+            //var messages = await _homeServices.GetLastMessagesAsync();
 
             var viewModels = _homeServices
                 .GetLastLoginUsers()

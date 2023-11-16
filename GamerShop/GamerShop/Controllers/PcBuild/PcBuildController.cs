@@ -146,7 +146,7 @@ public class PcBuildController : Controller
 
         var newBuild = new NewBuildBlm()
         {
-             CreatorId = currentUserId,
+            CreatorId = currentUserId,
             ProcessorId = viewModel.ProcessorId,
             MotherboardId = viewModel.MotherboardId,
             GpuId = viewModel.GpuId,
