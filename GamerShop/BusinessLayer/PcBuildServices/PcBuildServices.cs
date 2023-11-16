@@ -102,7 +102,7 @@ namespace BusinessLayer.PcBuildServices
             _buildRepository.Save(buildDb);
         }
 
-        public BaseBuildBlm GetBuildById(int id)
+        public BuildBlm GetBuildById(int id)
         {
             var build = _buildRepository.Get(id);
             return new BuildBlm()

@@ -178,7 +178,40 @@ public class PcBuildController : Controller
         var build = _buildServices.GetBuildById(id);
         var viewModel = new BuildViewModel()
         {
-            
+            Id = build.Id,
+            CreatorName = build.CreatorName,
+            CreatorAvatarPath = build.CreatorAvatarPath,
+            DatePublished = build.DateOfCreate,
+            Cpu = build.CpuName,
+            CpuColler = build.CpuCollerName,
+            Case = build.CaseName,
+            CasePrice = build.CasePrice,
+            CollerPrice = build.CollerPrice,
+            CpuPrice = build.CpuPrice,
+            CpuRate = "1",
+            Comments = new List<string> { "1" },
+            CommentsCount = "1",
+            CpuTempIdle = "1",
+            CpuTempLoad = "1",
+            DateBuild = "1",
+            Description = build.Description,
+            Gpu = build.GpuName,
+            GpuCount = build.GpuCount,
+            GpuPrice = build.GpuPrice,
+            GpuTempIdle = "1",
+            GpuTempLoad = "1",
+            Label = build.Label,
+            Link = "1",
+            Motherboard = build.MotherboardName,
+            MotherboardPrice = build.MotherboardPrice,
+            Psu = build.PsuName,
+            PsuPrice = build.PsuPrice,
+            Ram = build.RamName,
+            RamPrice = build.RamPrice,
+            Rating = build.Rating.ToString(),
+            Storage = build.HddName,
+            StorageCount = build.HddCount,
+            StoragePrice = build.HddPrice
         };
         return View();
     }
