@@ -2,16 +2,11 @@ namespace BusinessLayerInterfaces.BusinessModels.PCBuildModels;
 
 public class BuildBlm : BaseBuildBlm
 {
-    public int Id { get; set; }
-    public string Label { get; set; }
     public string Description { get; set; }
     public bool isVirtual { get; set; }
     public string? PhotosPath { get; set; }
-    public int Rating { get; set; }
-    public string Price { get; set; }
     public bool IsPrivate { get; set; }
     public string CreatorAvatarPath { get; set; }
-    public string CreatorName { get; set; }
     public string Link { get; set; }
     public string CpuName { get; set; }
     public string CpuPrice { get; set; }

@@ -73,6 +73,8 @@ builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSignalR();
 
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 var dbContextResolver = new Startup();
 dbContextResolver.RegisterDbContext(builder.Services);
 

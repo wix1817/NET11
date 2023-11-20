@@ -40,6 +40,7 @@ public class PcBuildController : Controller
                 .Builds
                 .Select(shortBuildBlm => new BuildsIndexViewModel
                 {
+                    Id = shortBuildBlm.Id.ToString(),
                     UserName = shortBuildBlm.CreatorName,
                     Price = shortBuildBlm.Price,
                     Rating = shortBuildBlm.Rating.ToString(),
@@ -175,6 +176,8 @@ public class PcBuildController : Controller
     [HttpGet]
     public IActionResult Build(int id)
     {
+        if (id == 0)
+            return RedirectToAction("Index", "PcBuild");
         var build = _buildServices.GetBuildById(id);
         var viewModel = new BuildViewModel()
         {
@@ -213,6 +216,6 @@ public class PcBuildController : Controller
             StorageCount = build.HddCount,
             StoragePrice = build.HddPrice
         };
-        return View();
+        return View(viewModel);
     }
 }

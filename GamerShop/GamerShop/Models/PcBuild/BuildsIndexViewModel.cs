@@ -2,6 +2,7 @@
 {
     public class BuildsIndexViewModel
     {
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string? UserPhotoPath { get; set; }
         public string? BuildPhotoPath { get; set; }

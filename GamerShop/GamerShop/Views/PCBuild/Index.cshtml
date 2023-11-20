@@ -10,16 +10,20 @@
         {
             <div class="col">
                 <div class="card h-100 border-dark mb-3">
-                    <img src="GamerShop\wwwroot\img\PCBuild\qq.png" class="card-img-top" alt="aaa">
+                    <img src="~/img/PCBuild/example.jpg" class="card-img-top" alt="aaa">
                     <div class="card-body text-dark">
                         <h5 class="card-title">@build.BuildName</h5>
                         <p class="card-text">@build.UserName</p>
                         <p class="card-text">@build.Processor</p>
                         <p class="card-text">@build.GPU</p>
+                        @Html.ActionLink("","Build", "PcBuild", new { id = build.Id }, new { @class = "stretched-link" })
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">@build.Price рублей</small>
-                        <small class="text-muted">@build.Rating</small>
+                    <div class="card-footer container">
+                        <div class="row">
+                            <small class="text-muted col-8">@build.Price рублей</small>
+                            <small class="text-muted text-end col">@build.Rating</small>
+                        </div>
+
                     </div>
                 </div>
             </div>
