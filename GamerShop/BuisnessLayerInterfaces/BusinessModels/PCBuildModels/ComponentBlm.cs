@@ -1,6 +1,8 @@
 namespace BusinessLayerInterfaces.BusinessModels.PCBuildModels;
 
-public class ComponentBlm : BaseComponentBlm
+public class ComponentBlm
 {
-    //TODO Make full ComponentBlm model
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
 }

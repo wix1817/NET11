@@ -11,39 +11,39 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="statBlock">
-                        @Model.Rating
-                        @Model.CommentsCount
-                        @Model.Link
-                    </div>
-                    <div class="partList">
-                        @Model.Cpu
-                        @Model.CpuColler
-                        @Model.Motherboard
-                        @Model.Ram
-                        @Model.Storage
-                        @Model.Gpu
-                        @Model.Case
-                        @Model.Psu
-                    </div>
-                    <div class="details">
-                        @Model.DatePublished
-                        @Model.DateBuild
-                        @Model.CpuRate
-                        @Model.CpuTempIdle
-                        @Model.CpuTempLoad
-                        @Model.GpuTempIdle
-                        @Model.GpuTempLoad
-                    </div>
+                <div class="statBlock">
+                    @Model.Rating
+                    @Model.CommentsCount
+                    @Model.Link
                 </div>
-                <div class="col-sm-9">
-                    <div class="description">
-                        @Model.Description
-                    </div>
-                    <div class="comments">
-                        @Model.Comments
-                    </div>
+            </div>
+            <div class="row">
+                <div class="partList col-md-4">
+                    @Model.Cpu
+                    @Model.CpuColler
+                    @Model.Motherboard
+                    @Model.Ram
+                    @Model.Storage
+                    @Model.Gpu
+                    @Model.Case
+                    @Model.Psu
+                </div>
+                <div class="description col">
+                    @Model.Description
+                </div>
+            </div>
+            <div class="row">
+                <div class="details col-md-4">
+                    @Model.DatePublished
+                    @Model.DateBuild
+                    @Model.CpuRate
+                    @Model.CpuTempIdle
+                    @Model.CpuTempLoad
+                    @Model.GpuTempIdle
+                    @Model.GpuTempLoad
+                </div>
+                <div class="comments col">
+                    @Model.Comments
                 </div>
             </div>
         </div>

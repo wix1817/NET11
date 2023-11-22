@@ -11,4 +11,5 @@ public interface IBuildServices
     IndexBuildBlm GetIndexBuildBlm(int page, int perPage);
     void CreateNewBuild(NewBuildBlm newBuild);
     BuildBlm GetBuildById(int id);
+    void FollowBuild(int userId);
 }

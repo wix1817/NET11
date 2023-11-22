@@ -2,6 +2,7 @@
 using BusinessLayerInterfaces.PcBuilderServices;
 using DALInterfaces.Models.PcBuild;
 using DALInterfaces.Repositories;
+using DALInterfaces.Repositories.Movies;
 using DALInterfaces.Repositories.PCBuild;
 
 namespace BusinessLayer.PcBuildServices
@@ -19,6 +20,7 @@ namespace BusinessLayer.PcBuildServices
         private ICoolerRepository _coolerRepository;
         private IPsuRepository _psuRepository;
         private IUserRepository _userRepository;
+        private IRatingRepository _ratingRepository;
 
         public PcBuildServices(IBuildRepository buildRepository, IProcessorRepository processorRepository, 
             IMotherboardRepository motherboardRepository, IRamRepository ramRepository, IGpuRepository gpuRepository, 
@@ -143,6 +145,16 @@ namespace BusinessLayer.PcBuildServices
                 PsuPrice = build.Psu.Price.ToString(),
                 DateOfCreate = build.DateOfCreate.ToString()
             };
+        }
+
+        public void FollowBuild(int userId)
+        {
+            //_ratingRepository.CheckOnFollow();
+        }
+
+        private bool CheckOnFollow(int userId, int buildId)
+        {
+            return false;
         }
 
         private decimal CalculatePrice(Processor processor, Motherboard motherboard, Gpu? gpu, int? gpuCount, Ssd? ssd,

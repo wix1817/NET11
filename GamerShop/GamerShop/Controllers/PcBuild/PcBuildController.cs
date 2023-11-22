@@ -218,4 +218,12 @@ public class PcBuildController : Controller
         };
         return View(viewModel);
     }
+
+    [Authorize]
+    [HttpPost]
+    public IActionResult Follow(int userId)
+    {
+        _buildServices.FollowBuild(userId);
+        return RedirectToAction("Index", "PcBuild");
+    }
 }

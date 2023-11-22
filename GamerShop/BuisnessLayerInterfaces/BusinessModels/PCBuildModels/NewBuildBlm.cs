@@ -1,4 +1,4 @@
-﻿namespace BusinessLayerInterfaces.BusinessModels.PCBuildModels;
+﻿ namespace BusinessLayerInterfaces.BusinessModels.PCBuildModels;
 
 public class NewBuildBlm
 {

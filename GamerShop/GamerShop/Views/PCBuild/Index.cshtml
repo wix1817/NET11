@@ -1,4 +1,9 @@
-﻿@model GamerShop.Models.PcBuild.PaginatorBuildsViewModel
+﻿@using GamerShop.Services
+@model GamerShop.Models.PcBuild.PaginatorBuildsViewModel
+
+@{
+    Layout = "_PcBuildLayout";
+}
 
 <div>
     <h2>Все сборки</h2>
@@ -20,8 +25,18 @@
                     </div>
                     <div class="card-footer container">
                         <div class="row">
-                            <small class="text-muted col-8">@build.Price рублей</small>
-                            <small class="text-muted text-end col">@build.Rating</small>
+                            <small class="text-muted col-6 col-sm-8 col-md-6 col-lg-6">@build.Price рублей</small>
+                            <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
+                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Follow">
+                                    <i class="fi fi-rr-arrow-up"></i>
+                                </a>
+                            </small>
+                            <small class="text-muted col-4 col-sm-3 col-md-4 col-lg-4">@build.Rating</small>
+                            <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
+                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Unfollow">
+                                    <i class="fi fi-rr-arrow-down"></i>
+                                </a>
+                            </small>
                         </div>
 
                     </div>
