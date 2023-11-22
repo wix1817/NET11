@@ -1,5 +1,7 @@
-﻿using BusinessLayerInterfaces.BusinessModels.PCBuildModels;
+﻿using BusinessLayerInterfaces.BusinessModels;
+using BusinessLayerInterfaces.BusinessModels.PCBuildModels;
 using BusinessLayerInterfaces.PcBuilderServices;
+using DALInterfaces.DataModels.PcBuild;
 using DALInterfaces.Models.PcBuild;
 using DALInterfaces.Repositories;
 using DALInterfaces.Repositories.Movies;
@@ -40,16 +42,15 @@ namespace BusinessLayer.PcBuildServices
             _userRepository = userRepository;
         }
 
-        public IndexBuildBlm GetIndexBuildBlm(int page, int perPage)
+        public PaginatorBlm<ShortBuildBlm> GetPaginatorBlm(int page, int perPage)
         {
-            var data = _buildRepository.GetBuildPaginatorDataModel(page, perPage);
-            return new IndexBuildBlm
+            var data = _buildRepository.GetPaginatorDataModel(Map, page, perPage);
+            return new PaginatorBlm<ShortBuildBlm>()
             {
                 Count = data.Count,
                 Page = data.Page,
                 PerPage = data.PerPage,
-                Builds = data.Builds
-                    .Where(x => x.IsPrivate == false)
+                Items = data.Items
                     .Select(model => new ShortBuildBlm
                     {
                         Id = model.Id,
@@ -62,6 +63,22 @@ namespace BusinessLayer.PcBuildServices
                         ProcessorName = model.ProcessorName,
                         GpuName = model.GpuName
                     }).ToList()
+            };
+        }
+
+        private BuildDataModel Map(Build build)
+        {
+            return new BuildDataModel
+            {
+                Id = build.Id,
+                Label = build.Label,
+                Price = build.Price,
+                Rating = build.Rating,
+                CreatorId = build.Creator.Id,
+                CreatorName = build.Creator.Name,
+                DateOfCreate = build.DateOfCreate,
+                ProcessorName = build.Processor.FullName,
+                GpuName = build.Gpu.FullName
             };
         }
 

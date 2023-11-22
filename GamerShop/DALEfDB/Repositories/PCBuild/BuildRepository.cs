@@ -2,6 +2,7 @@
 using DALInterfaces.Models;
 using DALInterfaces.Models.PcBuild;
 using DALInterfaces.Repositories.PCBuild;
+using Microsoft.EntityFrameworkCore;
 
 namespace DALEfDB.Repositories.PCBuild;
 
@@ -40,5 +41,13 @@ public class BuildRepository : BaseRepository<Build>, IBuildRepository
             PerPage = perPage,
             Builds = builds
         };
+    }
+
+    protected override IQueryable<Build> GetDbSetWithIncludeForPaginator()
+    {
+        return _context.Builds
+            .Include(x => x.Creator)
+            .Include( x => x.Gpu)
+            .Include(x => x.Processor);
     }
 }

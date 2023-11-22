@@ -1,10 +1,11 @@
 ﻿using BusinessLayerInterfaces.BusinessModels;
 using BusinessLayerInterfaces.BusinessModels.Books;
 using BusinessLayerInterfaces.Common;
+using DALInterfaces.Models.Books;
 
 namespace BusinessLayerInterfaces.BookServices
 {
-    public interface IBookServices: IPaginatorServices<BookGetBlm>
+    public interface IBookServices: IPaginatorServices<BookGetBlm, Book>
     {
         IEnumerable<BookGetBlm> GetAll();
 

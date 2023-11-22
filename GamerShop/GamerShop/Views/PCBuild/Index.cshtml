@@ -1,5 +1,5 @@
 ﻿@using GamerShop.Services
-@model GamerShop.Models.PcBuild.PaginatorBuildsViewModel
+@model GamerShop.Models.PaginatorViewModel<GamerShop.Models.PcBuild.BuildsIndexViewModel>
 
 @{
     Layout = "_PcBuildLayout";
@@ -11,7 +11,7 @@
 
 @{
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var build in Model.Builds)
+        @foreach (var build in Model.Items)
         {
             <div class="col">
                 <div class="card h-100 border-dark mb-3">
@@ -33,7 +33,7 @@
                             </small>
                             <small class="text-muted col-4 col-sm-3 col-md-4 col-lg-4">@build.Rating</small>
                             <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
-                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Unfollow">
+                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="CreateBuild">
                                     <i class="fi fi-rr-arrow-down"></i>
                                 </a>
                             </small>

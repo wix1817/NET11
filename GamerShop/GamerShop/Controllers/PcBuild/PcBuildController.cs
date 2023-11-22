@@ -12,46 +12,39 @@ public class PcBuildController : Controller
 {
     private readonly IBuildServices _buildServices;
     private readonly IAuthService _authService;
+    private readonly IPaginatorService _paginatorService;
 
-    public PcBuildController(IBuildServices buildServices, IAuthService authService)
+    public PcBuildController(IBuildServices buildServices, IAuthService authService, IPaginatorService paginatorService)
     {
         _buildServices = buildServices;
         _authService = authService;
+        _paginatorService = paginatorService;
     }
 
-    public IActionResult Index(int page = 1, int perPage = 10)
+    public IActionResult Index(int page = 1, int perPage = 10, string sortingCriteria = "Newest", bool isAscending = true)
     {
-        var dataFromBl = _buildServices.GetIndexBuildBlm(page, perPage);
-        var addtionalPageNumber = dataFromBl.Count % dataFromBl.PerPage == 0 
-            ? 0 
-            : 1;
-        
-        var availablePages = Enumerable
-            .Range(1, dataFromBl.Count / dataFromBl.PerPage + addtionalPageNumber)
-            .ToList();
+        var paginatorViewModel = _paginatorService.GetPaginatorViewModel(
+            _buildServices,
+            MapBlmToViewModel,
+            page,
+            perPage);
 
-        var viewModel = new PaginatorBuildsViewModel
+        return View(paginatorViewModel);
+    }
+
+    private BuildsIndexViewModel MapBlmToViewModel(ShortBuildBlm shortBuildBlm)
+    {
+        return new BuildsIndexViewModel
         {
-            Page = dataFromBl.Page,
-            PerPage = dataFromBl.PerPage,
-            Count = dataFromBl.Count,
-            AvailablePages = availablePages,
-            Builds = dataFromBl
-                .Builds
-                .Select(shortBuildBlm => new BuildsIndexViewModel
-                {
-                    Id = shortBuildBlm.Id.ToString(),
-                    UserName = shortBuildBlm.CreatorName,
-                    Price = shortBuildBlm.Price,
-                    Rating = shortBuildBlm.Rating.ToString(),
-                    BuildName = shortBuildBlm.Label,
-                    BuildPhotoPath = shortBuildBlm.PhotoPath,
-                    Processor = shortBuildBlm.ProcessorName,
-                    GPU = shortBuildBlm.GpuName ?? ""
-                })
-                .ToList()
+            Id = shortBuildBlm.Id.ToString(),
+            UserName = shortBuildBlm.CreatorName,
+            Price = shortBuildBlm.Price,
+            Rating = shortBuildBlm.Rating.ToString(),
+            BuildName = shortBuildBlm.Label,
+            BuildPhotoPath = shortBuildBlm.PhotoPath,
+            Processor = shortBuildBlm.ProcessorName,
+            GPU = shortBuildBlm.GpuName ?? ""
         };
-        return View(viewModel);
     }
 
     [Authorize]

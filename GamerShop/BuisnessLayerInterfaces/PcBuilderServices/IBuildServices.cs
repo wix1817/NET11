@@ -1,14 +1,15 @@
 using BusinessLayerInterfaces.BusinessModels.PCBuildModels;
+using BusinessLayerInterfaces.Common;
+using DALInterfaces.Models.PcBuild;
 
 namespace BusinessLayerInterfaces.PcBuilderServices;
 
-public interface IBuildServices
+public interface IBuildServices : IPaginatorServices<ShortBuildBlm, Build>
 {
     IEnumerable<BaseBuildBlm> GetAllBuilds();
     void Remove(int id);
     void Save(BaseBuildBlm buildBlm);
     public AllComponentsForAddingBlm GetAllComponents();
-    IndexBuildBlm GetIndexBuildBlm(int page, int perPage);
     void CreateNewBuild(NewBuildBlm newBuild);
     BuildBlm GetBuildById(int id);
     void FollowBuild(int userId);

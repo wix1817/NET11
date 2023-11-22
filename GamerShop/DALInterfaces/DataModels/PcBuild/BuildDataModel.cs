@@ -11,6 +11,4 @@ public class BuildDataModel
     public int Rating { get; set; }
     public int CreatorId { get; set; }
     public string CreatorName { get; set; }
-
-    public bool IsPrivate { get; set; }
 }
