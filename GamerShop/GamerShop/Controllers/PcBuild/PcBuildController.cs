@@ -5,6 +5,9 @@ using GamerShop.Models.PcBuild;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq.Expressions;
+using DALInterfaces.Models.Movies;
+using DALInterfaces.Models.PcBuild;
 
 namespace GamerShop.Controllers.PcBuild;
 
@@ -21,13 +24,18 @@ public class PcBuildController : Controller
         _paginatorService = paginatorService;
     }
 
-    public IActionResult Index(int page = 1, int perPage = 10, string sortingCriteria = "Newest", bool isAscending = true)
+    public IActionResult Index(int page = 1, int perPage = 4, string sortingCriteria = "Newest", bool isAscending = true)
     {
-        var paginatorViewModel = _paginatorService.GetPaginatorViewModel(
+        var filter = (Expression<Func<Build, bool>>)(x => x.IsPrivate == false);
+
+        var paginatorViewModel = _paginatorService.GetPaginatorViewModelWithFilter(
             _buildServices,
             MapBlmToViewModel,
+            filter,
+            sortingCriteria,
             page,
-            perPage);
+            perPage,
+            isAscending);
 
         return View(paginatorViewModel);
     }

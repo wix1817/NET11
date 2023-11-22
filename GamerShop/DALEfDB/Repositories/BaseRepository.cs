@@ -1,4 +1,5 @@
-﻿using DALInterfaces.DataModels;
+﻿using System.Linq.Expressions;
+using DALInterfaces.DataModels;
 using DALInterfaces.Models;
 using DALInterfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -74,6 +75,44 @@ namespace DALEfDB.Repositories
                 PerPage = perPage,
                 Items = items
             };
+        }
+
+        public virtual PaginatorDataModel<DataModelTemplate> GetPaginatorDataModelWithFilter<DataModelTemplate>(
+            Func<DbModel, DataModelTemplate> map,
+            Expression<Func<DbModel, bool>> filter,
+            int page,
+            int perPage,
+            Func<DbModel, IComparable> sortingCriteria,
+            bool isAscending)
+        {
+            var count = GetFiltered(filter).Count();
+
+            List<DataModelTemplate> items;
+
+            var query = GetFiltered(filter);
+
+            query = isAscending
+                ? query.OrderBy(sortingCriteria).AsQueryable()
+                : query.OrderByDescending(sortingCriteria).AsQueryable();
+
+            items = query
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
+                .Select(map)
+                .ToList();
+
+            return new PaginatorDataModel<DataModelTemplate>
+            {
+                Count = count,
+                Page = page,
+                PerPage = perPage,
+                Items = items
+            };
+        }
+
+        protected virtual IQueryable<DbModel> GetFiltered(Expression<Func<DbModel, bool>> filter)
+        {
+            return _dbSet.Where(filter);
         }
 
         public DbModel GetLast()

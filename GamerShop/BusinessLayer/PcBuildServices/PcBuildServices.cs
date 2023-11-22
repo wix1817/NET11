@@ -1,4 +1,5 @@
-﻿using BusinessLayerInterfaces.BusinessModels;
+﻿using System.Linq.Expressions;
+using BusinessLayerInterfaces.BusinessModels;
 using BusinessLayerInterfaces.BusinessModels.PCBuildModels;
 using BusinessLayerInterfaces.PcBuilderServices;
 using DALInterfaces.DataModels.PcBuild;
@@ -79,6 +80,64 @@ namespace BusinessLayer.PcBuildServices
                 DateOfCreate = build.DateOfCreate,
                 ProcessorName = build.Processor.FullName,
                 GpuName = build.Gpu.FullName
+            };
+        }
+
+        public PaginatorBlm<ShortBuildBlm> GetPaginatorBlmWithFilter(
+            Expression<Func<Build, bool>> filter,
+            string sortingCriteria,
+            int page,
+            int perPage,
+            bool isAscending)
+        {
+            Func<Build, IComparable> funcSortingCriteria;
+
+            switch (sortingCriteria)
+            {
+                case "Newest":
+                    funcSortingCriteria = collection =>
+                        collection
+                            .DateOfCreate;
+                    break;
+
+                case "Price":
+                    funcSortingCriteria = collection =>
+                        collection
+                            .Price;
+                    break;
+
+                //case "Alphabetically":
+                //    funcSortingCriteria = collection =>
+                //        collection
+                //            .Title;
+                //    break;
+
+                default:
+                    throw new ArgumentException("Неподдерживаемый критерий сортировки", nameof(sortingCriteria));
+            }
+            var movieCollectionPaginatorDataModel = _buildRepository
+                .GetPaginatorDataModelWithFilter(Map, filter, page, perPage, funcSortingCriteria, isAscending);
+
+            return new PaginatorBlm<ShortBuildBlm>()
+            {
+                Page = movieCollectionPaginatorDataModel.Page,
+                PerPage = movieCollectionPaginatorDataModel.PerPage,
+                Count = movieCollectionPaginatorDataModel.Count,
+                Items = movieCollectionPaginatorDataModel
+                    .Items
+                    .Select(model => new ShortBuildBlm
+                    {
+                        Id = model.Id,
+                        Label = model.Label,
+                        Price = model.Price.ToString(),
+                        Rating = model.Rating,
+                        CreatorId = model.CreatorId,
+                        CreatorName = model.CreatorName,
+                        DateOfCreate = model.DateOfCreate.ToShortDateString(),
+                        ProcessorName = model.ProcessorName,
+                        GpuName = model.GpuName
+                    })
+                    .ToList()
             };
         }
 
