@@ -4,41 +4,75 @@
     Layout = "_PcBuildLayout";
 }
 
-<div>
-    <div class="container-fluid text-center">
-        <p class="fs-4">BUILD</p>
-        <p class="fs-1 fw-bolder">@Model.Label</p>
-        <div>
-            <p class="fs-3 fw-light">by</p>
-            <img src="@Model.CreatorAvatarPath" class="rounded-circle" alt="">
-            <p class="fs-3 fw-bolder">@Model.CreatorName</p>
+<div class="container-fluid build-page">
+    <div class="container-fluid">
+        <div class="container-fluid upper-label rounded">
+            <div class="row text-center">
+                <p class="fs-4">Сборка</p>
+                <p class="fs-1 fw-bolder">@Model.Label</p>
+            </div>
+            <div class="row fs-3 fw-light text-center d-flex justify-content-center">
+                <div class="fs-3 fw-light d-flex justify-content-center">
+                    by
+                    <div class="fs-3 fw-bolder">@Model.CreatorName</div>
+                </div>
+            </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="partList col-md-4">
-                    <div class="card component-list" style="width: 18rem;">
+                    <div class="card component-list">
                         <div class="card-header">
                             <h4>Комплектующие</h4>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                @Model.Cpu
+                            <li class="list-group-item  flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Процессор</p>
+                                <div class="fw-bold">@Model.Cpu</div>
                             </li>
-                            <li class="list-group-item">@Model.CpuColler</li>
-                            <li class="list-group-item">@Model.Motherboard</li>
-                            <li class="list-group-item">@Model.Ram</li>
-                            <li class="list-group-item">@Model.Storage</li>
-                            <li class="list-group-item">@Model.Gpu</li>
-                            <li class="list-group-item">@Model.Case</li>
-                            <li class="list-group-item">@Model.Psu</li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Процессорный куллер</p>
+                                <div class="fw-bold">@Model.CpuColler</div>
+                            </li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Материнская плата</p>
+                                <div class="fw-bold">@Model.Motherboard</div>
+                            </li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Оперативная память</p>
+                                <div class="fw-bold">@Model.Ram</div>
+                            </li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Накопитель</p>
+                                <div class="fw-bold">@Model.Storage</div>
+                            </li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Видеокарта</p>
+                                <div class="fw-bold">@Model.Gpu</div>
+                            </li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Корпус</p>
+                                <div class="fw-bold">@Model.Case</div>
+                            </li>
+                            <li class="list-group-item flex-row justify-content-between align-items-stretch">
+                                <p style="text-align: start">Блок питания</p>
+                                <div class="fw-bold">@Model.Psu</div>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="description col">
-                    @Model.Description
+                <div class="col">
+                    <div class="description card">
+                        <div class="card-header">
+                            <h4>Описание</h4>
+                        </div>
+                        <div class="card-body">
+                            @Model.Description
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
+           <!-- <div class="row">
                 <div class="statBlock">
                     @Model.Rating
                     @Model.CommentsCount
@@ -57,7 +91,7 @@
                 <div class="comments col">
                     @Model.Comments
                 </div>
-            </div>
+             </div>-->
         </div>
     </div>
 </div>

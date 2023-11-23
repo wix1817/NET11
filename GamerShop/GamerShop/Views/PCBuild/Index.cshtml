@@ -12,7 +12,7 @@
         </div>
         <div class="btn-group col-6">
             <p><strong>Сортировать по:</strong></p>
-            <a class="btn btn-primary active" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Date">Дате</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Date" asp-route-page="1">Дате</a>
             <a class="btn btn-primary" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Rating">Рейтингу</a>
             <a class="btn btn-primary" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Price">Цене</a>
         </div>
@@ -35,12 +35,13 @@
                     <div class="card-footer container">
                         <div class="row">
                             <small class="text-muted col-6 col-sm-8 col-md-6 col-lg-6">@build.Price рублей</small>
+                            <small class="col sell">@build.RedPrice -10%</small>
                             <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
                                 <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Like" asp-route-buildId="@build.Id">
                                     <i class="fi fi-rr-arrow-up"></i>
                                 </a>
                             </small>
-                            <small class="text-muted col-4 col-sm-3 col-md-4 col-lg-4">@build.Rating</small>
+                            <small class="text-muted col-2 col-sm-2 col-md-2 col-lg-2">@build.Rating</small>
                             <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
                                 <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Unlike" asp-route-buildId="@build.Id">
                                     <i class="fi fi-rr-arrow-down follow-arrow"></i>

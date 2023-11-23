@@ -9,55 +9,55 @@
 {
     <div class="form-group">
       <label for="exampleFormControlInput1">Название сборки</label>
-      @Html.TextBox(nameof(CreateBuildAnswerViewModel.Title), "",new {@class = "form-control", type="text", id="exampleFormControlInput1", placeholder="Лучшая сборка на диком западе"})
+        @Html.TextBox(nameof(CreateBuildAnswerViewModel.Title), "", new { @class = "form-control", type = "text", id = "exampleFormControlInput1", placeholder = "Лучшая сборка на диком западе", required = "required" })
     </div>
     <div class="form-group">
-      <label for="ProcessorSelect">Процессор:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.ProcessorId),Model.Processors, new{ @class = "form-control", id = "ProcessorSelect" })
+        <label for="ProcessorSelect">Процессор:</label>
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.ProcessorId), Model.Processors, new { @class = "form-control", id = "ProcessorSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="MotherboardSelect">Материнская плата:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.MotherboardId),Model.Motherboards, new{ @class = "form-control", id = "MotherboardSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.MotherboardId), Model.Motherboards, new { @class = "form-control", id = "MotherboardSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="GpuSelect">Видеокарта:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.GpuId),Model.Gpus, new{ @class = "form-control col-md-10", id = "GpuSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.GpuId), Model.Gpus, new { @class = "form-control col-md-10", id = "GpuSelect", required = "required" })
       <label for="GpuCountSelect">Количество:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.GpuCount),Model.ComponentCount, new{ @class = "form-control col-md-2", id = "GpuCountSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.GpuCount), Model.ComponentCount, new { @class = "form-control col-md-2", id = "GpuCountSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="RamSelect">Оперативная память:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.RamId),Model.Rams, new{ @class = "form-control col-md-10", id = "RamSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.RamId), Model.Rams, new { @class = "form-control col-md-10", id = "RamSelect", required = "required" })
       <label for="RamCountSelect">Количество:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.RamCount),Model.ComponentCount, new{ @class = "form-control col-md-2", id = "RamCountSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.RamCount), Model.ComponentCount, new { @class = "form-control col-md-2", id = "RamCountSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="HddSelect">Жесткий диск:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.HddId),Model.Hdds, new{ @class = "form-control col-md-10", id = "HddSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.HddId), Model.Hdds, new { @class = "form-control col-md-10", id = "HddSelect", required = "required" })
       <label for="HddCountSelect">Количество:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.HddCount),Model.ComponentCount, new{ @class = "form-control col-md-2", id = "HddCountSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.HddCount), Model.ComponentCount, new { @class = "form-control col-md-2", id = "HddCountSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="SsdSelect">Ssd:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.SsdId),Model.Ssds, new{ @class = "form-control", id = "SsdSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.SsdId), Model.Ssds, new { @class = "form-control", id = "SsdSelect", required = "required" })
       <label for="SsdCountSelect">Количество:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.SsdCount),Model.ComponentCount, new{ @class = "form-control", id = "SsdCountSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.SsdCount), Model.ComponentCount, new { @class = "form-control", id = "SsdCountSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="CoolerSelect">Система охлаждения:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.CoolerId),Model.Coolers, new{ @class = "form-control", id = "CoolerSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.CoolerId), Model.Coolers, new { @class = "form-control", id = "CoolerSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="PsuSelect">Блок питания:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.PsuId),Model.Psus, new{ @class = "form-control", id = "PsuSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.PsuId), Model.Psus, new { @class = "form-control", id = "PsuSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="CaseSelect">Корпус:</label>
-      @Html.DropDownList(nameof(CreateBuildAnswerViewModel.CaseId),Model.Cases, new{ @class = "form-control", id = "CaseSelect" })
+        @Html.DropDownList(nameof(CreateBuildAnswerViewModel.CaseId), Model.Cases, new { @class = "form-control", id = "CaseSelect", required = "required" })
     </div>
     <div class="form-group">
       <label for="Description">Описание</label>
-      @Html.TextArea(nameof(CreateBuildAnswerViewModel.Description), new {@class="form-control", id="Description", rows="3"})
+        @Html.TextArea(nameof(CreateBuildAnswerViewModel.Description), new { @class = "form-control", id = "Description", rows = "3", required = "required" })
     </div>
     <button type="submit" class="btn btn-primary">Создать сборку</button>
 

@@ -6,9 +6,6 @@ namespace BusinessLayerInterfaces.PcBuilderServices;
 
 public interface IBuildServices : IPaginatorServices<ShortBuildBlm, Build>
 {
-    IEnumerable<BaseBuildBlm> GetAllBuilds();
-    void Remove(int id);
-    void Save(BaseBuildBlm buildBlm);
     public AllComponentsForAddingBlm GetAllComponents();
     void CreateNewBuild(NewBuildBlm newBuild);
     BuildBlm GetBuildById(int id);

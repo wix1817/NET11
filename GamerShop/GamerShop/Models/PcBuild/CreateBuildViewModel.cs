@@ -5,6 +5,7 @@ namespace GamerShop.Models.PcBuild;
 public class CreateBuildViewModel
 {
     public List<SelectListItem> Processors { get; set; }
+    
     public List<SelectListItem> Motherboards { get; set; }
     public List<SelectListItem> Rams { get; set; }
     public List<SelectListItem> Cases { get; set; }

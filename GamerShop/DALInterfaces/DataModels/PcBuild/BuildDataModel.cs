@@ -4,6 +4,7 @@ public class BuildDataModel
 {
     public int Id { get; set; }
     public string Label { get; set; }
+    public string Description { get; set; }
     public DateTime DateOfCreate { get; set; }
     public string ProcessorName { get; set; }
     public string? GpuName { get; set; }

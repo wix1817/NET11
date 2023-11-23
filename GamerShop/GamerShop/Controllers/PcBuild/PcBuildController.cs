@@ -24,7 +24,7 @@ public class PcBuildController : Controller
         _paginatorService = paginatorService;
     }
 
-    public IActionResult Index(int page = 1, int perPage = 4, string sortingCriteria = "Date", bool isAscending = true)
+    public IActionResult Index(int page = 1, int perPage = 3, string sortingCriteria = "Date", bool isAscending = true)
     {
         var filter = (Expression<Func<Build, bool>>)(x => x.IsPrivate == false);
 
@@ -51,7 +51,8 @@ public class PcBuildController : Controller
             BuildName = shortBuildBlm.Label,
             BuildPhotoPath = shortBuildBlm.PhotoPath,
             Processor = shortBuildBlm.ProcessorName,
-            GPU = shortBuildBlm.GpuName ?? ""
+            GPU = shortBuildBlm.GpuName ?? "",
+            RedPrice = shortBuildBlm.RedPrice
         };
     }
 
@@ -65,7 +66,7 @@ public class PcBuildController : Controller
             .Cases
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -73,7 +74,7 @@ public class PcBuildController : Controller
             .Processors
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -81,7 +82,7 @@ public class PcBuildController : Controller
             .Motherboards
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -89,7 +90,7 @@ public class PcBuildController : Controller
             .Ssds
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -97,7 +98,7 @@ public class PcBuildController : Controller
             .Gpus
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -105,7 +106,7 @@ public class PcBuildController : Controller
             .Hdds
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -113,7 +114,7 @@ public class PcBuildController : Controller
             .Coolers
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -121,7 +122,7 @@ public class PcBuildController : Controller
             .Rams
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();
@@ -129,7 +130,7 @@ public class PcBuildController : Controller
             .Psus
             .Select(x => new SelectListItem()
             {
-                Text = x.Name,
+                Text = x.Name + " " + x.Price + " тугриков",
                 Value = x.Id.ToString(),
             })
             .ToList();

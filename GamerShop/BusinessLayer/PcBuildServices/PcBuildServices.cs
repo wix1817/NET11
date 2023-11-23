@@ -62,7 +62,8 @@ namespace BusinessLayer.PcBuildServices
                         CreatorName = model.CreatorName,
                         DateOfCreate = model.DateOfCreate.ToShortDateString(),
                         ProcessorName = model.ProcessorName,
-                        GpuName = model.GpuName
+                        GpuName = model.GpuName,
+                        RedPrice = (Convert.ToDouble(model.Price) * 0.9).ToString()
                     }).ToList()
             };
         }
@@ -114,15 +115,15 @@ namespace BusinessLayer.PcBuildServices
                 default:
                     throw new ArgumentException("Неподдерживаемый критерий сортировки", nameof(sortingCriteria));
             }
-            var movieCollectionPaginatorDataModel = _buildRepository
+            var buildPaginatorDataModel = _buildRepository
                 .GetPaginatorDataModelWithFilter(Map, filter, page, perPage, funcSortingCriteria, isAscending);
 
             return new PaginatorBlm<ShortBuildBlm>()
             {
-                Page = movieCollectionPaginatorDataModel.Page,
-                PerPage = movieCollectionPaginatorDataModel.PerPage,
-                Count = movieCollectionPaginatorDataModel.Count,
-                Items = movieCollectionPaginatorDataModel
+                Page = buildPaginatorDataModel.Page,
+                PerPage = buildPaginatorDataModel.PerPage,
+                Count = buildPaginatorDataModel.Count,
+                Items = buildPaginatorDataModel
                     .Items
                     .Select(model => new ShortBuildBlm
                     {
@@ -134,7 +135,8 @@ namespace BusinessLayer.PcBuildServices
                         CreatorName = model.CreatorName,
                         DateOfCreate = model.DateOfCreate.ToShortDateString(),
                         ProcessorName = model.ProcessorName,
-                        GpuName = model.GpuName
+                        GpuName = model.GpuName,
+                        RedPrice = Math.Round(Convert.ToDouble(model.Price) * 0.9).ToString()
                     })
                     .ToList()
             };
@@ -166,15 +168,16 @@ namespace BusinessLayer.PcBuildServices
                 Psu = psu,
                 Case = currentCase,
                 Cooler = cooler,
-                isVirtual = false, //TODO
+                isVirtual = false, 
                 DateOfCreate = DateTime.Now,
                 Label = newBuildBlm.Title,
-                IsPrivate = false, //TODO
+                IsPrivate = false, 
                 GpusCount = newBuildBlm.GpuCount,
                 SsdCount = newBuildBlm.SsdCount,
                 HddCount = newBuildBlm.HddCount,
                 RamCount = newBuildBlm.RamCount,
-                Price = price
+                Price = price,
+                Description = newBuildBlm.Description
             };
             _buildRepository.Save(buildDb);
         }
@@ -195,7 +198,6 @@ namespace BusinessLayer.PcBuildServices
                 CreatorId = build.Creator.Id,
                 CreatorAvatarPath = build.Creator.AvatarPath,
                 CreatorName = build.Creator.Name,
-                //Link = $"dsgsdgsdgsdgsgddsg/{build.Id}", //TODO
                 CpuName = build.Processor.FullName,
                 CpuPrice = build.Processor.Price.ToString(),
                 CpuCollerName = build.Cooler.FullName,
@@ -366,21 +368,6 @@ namespace BusinessLayer.PcBuildServices
                 Gpus = GetAllGpus(),
                 Psus = GetAllPsus()
             };
-        }
-
-        public IEnumerable<BaseBuildBlm> GetAllBuilds()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save(BaseBuildBlm buildBlm)
-        {
-            throw new NotImplementedException();
         }
     }
 }
