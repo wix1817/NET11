@@ -1,5 +1,9 @@
 ﻿@model GamerShop.Models.PcBuild.BuildViewModel
 
+@{
+    Layout = "_PcBuildLayout";
+}
+
 <div>
     <div class="container-fluid text-center">
         <p class="fs-4">BUILD</p>
@@ -11,25 +15,33 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="statBlock">
-                    @Model.Rating
-                    @Model.CommentsCount
-                    @Model.Link
-                </div>
-            </div>
-            <div class="row">
                 <div class="partList col-md-4">
-                    @Model.Cpu
-                    @Model.CpuColler
-                    @Model.Motherboard
-                    @Model.Ram
-                    @Model.Storage
-                    @Model.Gpu
-                    @Model.Case
-                    @Model.Psu
+                    <div class="card component-list" style="width: 18rem;">
+                        <div class="card-header">
+                            <h4>Комплектующие</h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                @Model.Cpu
+                            </li>
+                            <li class="list-group-item">@Model.CpuColler</li>
+                            <li class="list-group-item">@Model.Motherboard</li>
+                            <li class="list-group-item">@Model.Ram</li>
+                            <li class="list-group-item">@Model.Storage</li>
+                            <li class="list-group-item">@Model.Gpu</li>
+                            <li class="list-group-item">@Model.Case</li>
+                            <li class="list-group-item">@Model.Psu</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="description col">
                     @Model.Description
+                </div>
+            </div>
+            <div class="row">
+                <div class="statBlock">
+                    @Model.Rating
+                    @Model.CommentsCount
                 </div>
             </div>
             <div class="row">

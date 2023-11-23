@@ -3,6 +3,7 @@ using BusinessLayerInterfaces.BusinessModels;
 using BusinessLayerInterfaces.BusinessModels.PCBuildModels;
 using BusinessLayerInterfaces.PcBuilderServices;
 using DALInterfaces.DataModels.PcBuild;
+using DALInterfaces.Models;
 using DALInterfaces.Models.PcBuild;
 using DALInterfaces.Repositories;
 using DALInterfaces.Repositories.Movies;
@@ -23,12 +24,11 @@ namespace BusinessLayer.PcBuildServices
         private ICoolerRepository _coolerRepository;
         private IPsuRepository _psuRepository;
         private IUserRepository _userRepository;
-        private IRatingRepository _ratingRepository;
 
         public PcBuildServices(IBuildRepository buildRepository, IProcessorRepository processorRepository, 
             IMotherboardRepository motherboardRepository, IRamRepository ramRepository, IGpuRepository gpuRepository, 
             ISsdRepository ssdRepository, IHddRepository hddRepository, ICaseRepository caseRepository, 
-            ICoolerRepository coolerRepository, IPsuRepository psuRepository, IUserRepository userRepository)
+            ICoolerRepository coolerRepository, IPsuRepository psuRepository, IUserRepository userRepository, IRatingRepository ratingRepository)
         {
             _buildRepository = buildRepository;
             _processorRepository = processorRepository;
@@ -94,7 +94,7 @@ namespace BusinessLayer.PcBuildServices
 
             switch (sortingCriteria)
             {
-                case "Newest":
+                case "Date":
                     funcSortingCriteria = collection =>
                         collection
                             .DateOfCreate;
@@ -105,12 +105,11 @@ namespace BusinessLayer.PcBuildServices
                         collection
                             .Price;
                     break;
-
-                //case "Alphabetically":
-                //    funcSortingCriteria = collection =>
-                //        collection
-                //            .Title;
-                //    break;
+                case "Rating":
+                    funcSortingCriteria = collection =>
+                        collection
+                            .Rating;
+                    break;
 
                 default:
                     throw new ArgumentException("Неподдерживаемый критерий сортировки", nameof(sortingCriteria));
@@ -223,14 +222,28 @@ namespace BusinessLayer.PcBuildServices
             };
         }
 
-        public void FollowBuild(int userId)
+        public void LikeBuild(int userId, int buildId)
         {
-            //_ratingRepository.CheckOnFollow();
+            var user = _userRepository.Get(userId);
+            var build = _buildRepository.Get(buildId);
+            if (!build.UsersWhoLikeIt.Contains(user))
+            {
+                build.Rating += 1;
+                build.UsersWhoLikeIt.Add(user);
+                _buildRepository.Update(build);
+            }
         }
 
-        private bool CheckOnFollow(int userId, int buildId)
+        public void UnlikeBuild(int userId, int buildId)
         {
-            return false;
+            var user = _userRepository.Get(userId);
+            var build = _buildRepository.Get(buildId);
+            if (build.UsersWhoLikeIt.Contains(user))
+            {
+                build.Rating -= 1;
+                build.UsersWhoLikeIt.Remove(user);
+                _buildRepository.Update(build);
+            }
         }
 
         private decimal CalculatePrice(Processor processor, Motherboard motherboard, Gpu? gpu, int? gpuCount, Ssd? ssd,
@@ -243,7 +256,12 @@ namespace BusinessLayer.PcBuildServices
             return processor.Price + motherboard.Price + gpusSum + ssdSum + hddSum + ramSum + psu.Price +
                    currentCase.Price + cooler.Price;
         }
-        
+
+        private int CalculateRating(Build build)
+        {
+            return build.UsersWhoLikeIt.Count;
+        }
+
         private IEnumerable<ComponentBlm> GetAllProcessors()
         {
             return _processorRepository.GetAll().Select(c => new ComponentBlm()

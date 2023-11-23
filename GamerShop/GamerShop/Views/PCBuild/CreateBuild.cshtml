@@ -1,6 +1,10 @@
 @using GamerShop.Models.PcBuild
 @model GamerShop.Models.PcBuild.CreateBuildViewModel
 
+@{
+    Layout = "_PcBuildLayout";
+}
+
 @using (Html.BeginForm("CreateBuild", "PcBuild", FormMethod.Post))
 {
     <div class="form-group">

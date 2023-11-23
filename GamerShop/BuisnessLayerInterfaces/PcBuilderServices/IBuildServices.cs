@@ -12,5 +12,6 @@ public interface IBuildServices : IPaginatorServices<ShortBuildBlm, Build>
     public AllComponentsForAddingBlm GetAllComponents();
     void CreateNewBuild(NewBuildBlm newBuild);
     BuildBlm GetBuildById(int id);
-    void FollowBuild(int userId);
+    void LikeBuild(int userId, int buildId);
+    void UnlikeBuild(int userId, int buildId);
 }

@@ -43,11 +43,11 @@ public class BuildRepository : BaseRepository<Build>, IBuildRepository
         };
     }
 
-    protected override IQueryable<Build> GetDbSetWithIncludeForPaginator()
+   /* protected override IQueryable<Build> GetDbSetWithIncludeForPaginator()
     {
         return _context.Builds
             .Include(x => x.Creator)
             .Include( x => x.Gpu)
             .Include(x => x.Processor);
-    }
+    }*/
 }

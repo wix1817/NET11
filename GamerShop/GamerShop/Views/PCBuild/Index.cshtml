@@ -5,11 +5,18 @@
     Layout = "_PcBuildLayout";
 }
 
-<div>
-    <h2>Все сборки</h2>
-</div>
-
 @{
+    <div class="row">
+        <div class="col-6">
+            <h4>Все сборки</h4>
+        </div>
+        <div class="btn-group col-6">
+            <p><strong>Сортировать по:</strong></p>
+            <a class="btn btn-primary active" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Date">Дате</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Rating">Рейтингу</a>
+            <a class="btn btn-primary" asp-area="" asp-controller="PcBuild" asp-action="Index" asp-route-sortingCriteria="Price">Цене</a>
+        </div>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach (var build in Model.Items)
         {
@@ -17,24 +24,26 @@
                 <div class="card h-100 border-dark mb-3">
                     <img src="~/img/PCBuild/example.jpg" class="card-img-top" alt="aaa">
                     <div class="card-body text-dark">
-                        <h5 class="card-title">@build.BuildName</h5>
-                        <p class="card-text">@build.UserName</p>
-                        <p class="card-text">@build.Processor</p>
-                        <p class="card-text">@build.GPU</p>
-                        @Html.ActionLink("","Build", "PcBuild", new { id = build.Id }, new { @class = "stretched-link" })
+                        <a class="stretched-link text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Build" asp-route-id="@build.Id">
+                            <h5 class="card-title">@build.BuildName</h5>
+                            <p class="card-text">by @build.UserName</p>
+                            <p class="card-text">@build.Processor</p>
+                            <p class="card-text">@build.GPU</p>
+                        </a>
+                        
                     </div>
                     <div class="card-footer container">
                         <div class="row">
                             <small class="text-muted col-6 col-sm-8 col-md-6 col-lg-6">@build.Price рублей</small>
                             <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
-                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Follow">
+                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Like" asp-route-buildId="@build.Id">
                                     <i class="fi fi-rr-arrow-up"></i>
                                 </a>
                             </small>
                             <small class="text-muted col-4 col-sm-3 col-md-4 col-lg-4">@build.Rating</small>
                             <small class="text-muted col-1 col-sm-1 col-md-1 col-lg-1">
-                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="CreateBuild">
-                                    <i class="fi fi-rr-arrow-down"></i>
+                                <a class="stretched-link follow-button text-decoration-none text-reset" asp-area="" asp-controller="PcBuild" asp-action="Unlike" asp-route-buildId="@build.Id">
+                                    <i class="fi fi-rr-arrow-down follow-arrow"></i>
                                 </a>
                             </small>
                         </div>

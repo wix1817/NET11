@@ -24,7 +24,7 @@ public class PcBuildController : Controller
         _paginatorService = paginatorService;
     }
 
-    public IActionResult Index(int page = 1, int perPage = 4, string sortingCriteria = "Newest", bool isAscending = true)
+    public IActionResult Index(int page = 1, int perPage = 4, string sortingCriteria = "Date", bool isAscending = true)
     {
         var filter = (Expression<Func<Build, bool>>)(x => x.IsPrivate == false);
 
@@ -177,8 +177,6 @@ public class PcBuildController : Controller
     [HttpGet]
     public IActionResult Build(int id)
     {
-        if (id == 0)
-            return RedirectToAction("Index", "PcBuild");
         var build = _buildServices.GetBuildById(id);
         var viewModel = new BuildViewModel()
         {
@@ -221,10 +219,18 @@ public class PcBuildController : Controller
     }
 
     [Authorize]
-    [HttpPost]
-    public IActionResult Follow(int userId)
+    public IActionResult Like(int buildId)
     {
-        _buildServices.FollowBuild(userId);
-        return RedirectToAction("Index", "PcBuild");
+        var userId = _authService.GetCurrentUser().Id;
+        _buildServices.LikeBuild(userId, buildId);
+        return RedirectToAction("Index");
+    }
+
+    [Authorize]
+    public IActionResult Unlike(int buildId)
+    {
+        var userId = _authService.GetCurrentUser().Id;
+        _buildServices.UnlikeBuild(userId, buildId);
+        return RedirectToAction("Index");
     }
 }
